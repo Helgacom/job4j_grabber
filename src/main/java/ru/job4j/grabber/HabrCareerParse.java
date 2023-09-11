@@ -25,8 +25,7 @@ public class HabrCareerParse {
             String datetime = row.select(".vacancy-card__date")
                     .first()
                     .child(0)
-                    .attr("datetime")
-                    .split("T")[0];
+                    .attr("datetime");
             String link = String.format("%s%s", SOURCE_LINK, linkElement.attr("href"));
             System.out.printf("%s [%s] %s%n", vacancyName, datetime, link);
         });

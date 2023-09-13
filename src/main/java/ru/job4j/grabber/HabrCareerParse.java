@@ -15,7 +15,7 @@ public class HabrCareerParse {
 
     private static final String PAGE_LINK = String.format("%s/vacancies/java_developer", SOURCE_LINK);
 
-    private static int pages_count = 5;
+    private static int count = 5;
 
     public static void main(String[] args) throws IOException {
         int page = 1;
@@ -37,7 +37,7 @@ public class HabrCareerParse {
                 String link = String.format("%s%s", SOURCE_LINK, linkElement.attr("href"));
                 System.out.printf("%s [%s] %s%n", vacancyName, datetime, link);
             });
-            pages_count--;
-        } while (pages_count > 0);
+            count--;
+        } while (count > 0);
     }
 }

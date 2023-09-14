@@ -61,13 +61,12 @@ public class Post {
 
     @Override
     public String toString() {
-        return "Post{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", link='" + link + '\'' +
-                ", description='" + description + '\'' +
-                ", created=" + created +
-                '}';
+        return "Post{"
+                + "id=" + id
+                + ", title='" + title + '\''
+                + ", link='" + link + '\''
+                + ", description='" + description + '\''
+                + ", created=" + created + '}';
     }
 
     @Override

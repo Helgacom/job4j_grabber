@@ -14,7 +14,7 @@ import java.util.List;
 
 public class HabrCareerParse implements Parse {
 
-    private static int count = 5;
+    private final int count = 5;
     private final DateTimeParser dataTimeParser;
 
     public HabrCareerParse(DateTimeParser dataTimeParser) {
@@ -24,15 +24,13 @@ public class HabrCareerParse implements Parse {
     @Override
     public List<Post> list(String link) throws IOException {
         List<Post> rsl = new ArrayList<>();
-        int page = 1;
-        do {
-            String pages = String.format("%s?page%s", link, page++);
+        for (int i = 1; i <= count; i++) {
+            String pages = String.format("%s?page%s", link, i);
             Connection connection = Jsoup.connect(pages);
             Document document = connection.get();
             Elements rows = document.select(".vacancy-card__inner");
             rows.forEach(row -> rsl.add(postParse(row)));
-            count--;
-        } while (count > 0);
+        }
         return rsl;
     }
 

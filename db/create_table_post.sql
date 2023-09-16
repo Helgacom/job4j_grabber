@@ -5,3 +5,5 @@ CREATE TABLE post (
     link text UNIQUE,
     created TIMESTAMP
 );
+
+

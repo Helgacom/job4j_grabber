@@ -25,11 +25,11 @@ public class PsqlStore implements Store {
     @Override
     public void save(Post post) {
         try (PreparedStatement ps = cnn.prepareStatement(
-                "INSERT INTO post(name, text, link, created) VALUES (?, ?, ?, ?) ON CONFLICT (link) DO NOTHING;",
+                "INSERT INTO post(name, link, text, created) VALUES (?, ?, ?, ?) ON CONFLICT (link) DO NOTHING;",
                 Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, post.getTitle());
-            ps.setString(2, post.getDescription());
-            ps.setString(3, post.getLink());
+            ps.setString(2, post.getLink());
+            ps.setString(3, post.getDescription());
             ps.setTimestamp(4, Timestamp.valueOf(post.getCreated()));
             ps.execute();
             try (ResultSet keys = ps.getGeneratedKeys()) {
@@ -84,8 +84,8 @@ public class PsqlStore implements Store {
         return new Post(
                 resultSet.getInt("id"),
                 resultSet.getString("name"),
-                resultSet.getString("text"),
                 resultSet.getString("link"),
+                resultSet.getString("text"),
                 resultSet.getTimestamp("created").toLocalDateTime());
     }
 }
